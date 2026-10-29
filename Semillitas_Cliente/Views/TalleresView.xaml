@@ -1,0 +1,317 @@
+xml<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.TalleresView"
+    Title="Talleres"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="22">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="6">
+
+                <Label
+                    Text="Talleres"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Label
+                    Text="Administra los talleres de Semillitas."
+                    FontSize="14"
+                    TextColor="#000000" />
+
+            </VerticalStackLayout>
+
+            <!-- Nuevo taller -->
+            <Button
+                Text="+ Nuevo taller"
+                Command="{Binding AgregarTallerCommand}"
+                BackgroundColor="#1B475D"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="48"
+                HorizontalOptions="Fill" />
+
+            <!-- Búsqueda -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeThickness="1"
+                Padding="14">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <Entry
+                    Placeholder="Buscar taller..."
+                    Text="{Binding Busqueda}"
+                    ClearButtonVisibility="WhileEditing"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="#1B475D"
+                    PlaceholderColor="#777777"
+                    HeightRequest="48" />
+
+            </Border>
+
+            <!-- Resumen -->
+            <VerticalStackLayout Spacing="12">
+
+                <Label
+                    Text="Resumen"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="14">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+
+                        <Label
+                            Text="Total de talleres"
+                            FontSize="13"
+                            TextColor="#1B475D" />
+
+                        <Label
+                            Text="{Binding TotalTalleres}"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+
+            <!-- Lista de talleres -->
+            <Label
+                Text="Lista de talleres"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#1B475D" />
+
+            <CollectionView
+                ItemsSource="{Binding Talleres}"
+                SelectionMode="None">
+
+                <CollectionView.EmptyView>
+                    <Border
+                        BackgroundColor="White"
+                        Stroke="#8EBD9D"
+                        StrokeThickness="1"
+                        Padding="24">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout
+                            Spacing="8"
+                            HorizontalOptions="Center">
+
+                            <Label
+                                Text="No hay talleres registrados"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Text="Cuando existan talleres, aparecerán aquí."
+                                FontSize="13"
+                                TextColor="#000000"
+                                HorizontalTextAlignment="Center" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border
+                            BackgroundColor="White"
+                            Stroke="#8EBD9D"
+                            StrokeThickness="1"
+                            Padding="16">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout Spacing="12">
+
+                                <!-- Nombre del taller -->
+                                <Label
+                                    Text="{Binding Nombre}"
+                                    FontSize="19"
+                                    FontAttributes="Bold"
+                                    TextColor="#1B475D"
+                                    LineBreakMode="WordWrap" />
+
+                                <BoxView
+                                    HeightRequest="1"
+                                    Color="#D3DC7C" />
+
+                                <!-- Instructor -->
+                                <VerticalStackLayout Spacing="4">
+
+                                    <Label
+                                        Text="Instructor"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding Instructor}"
+                                        FontSize="14"
+                                        TextColor="#000000"
+                                        LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                                <!-- Categoría -->
+                                <VerticalStackLayout Spacing="4">
+
+                                    <Label
+                                        Text="Categoría"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding Categoria}"
+                                        FontSize="14"
+                                        TextColor="#000000"
+                                        LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                                <!-- Costo mensual -->
+                                <VerticalStackLayout Spacing="4">
+
+                                    <Label
+                                        Text="Costo mensual"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding CostoMensual, StringFormat='{}{0:C}'}"
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        TextColor="#1B475D" />
+
+                                </VerticalStackLayout>
+
+                                <!-- Cupo máximo -->
+                                <VerticalStackLayout Spacing="4">
+
+                                    <Label
+                                        Text="Cupo máximo:"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding CupoMaximo}"
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        TextColor="#1B475D" />
+
+                                </VerticalStackLayout>
+
+                                <!-- Horarios -->
+                                <VerticalStackLayout Spacing="8">
+
+                                    <Label
+                                        Text="Horarios"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        TextColor="#1B475D" />
+
+                                    <CollectionView
+                                        ItemsSource="{Binding Horarios}"
+                                        SelectionMode="None">
+
+                                        <CollectionView.EmptyView>
+                                            <Label
+                                                Text="Sin horarios registrados"
+                                                FontSize="13"
+                                                TextColor="#777777" />
+                                        </CollectionView.EmptyView>
+
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid
+                                                    ColumnDefinitions="*,Auto"
+                                                    RowDefinitions="Auto,Auto"
+                                                    ColumnSpacing="10"
+                                                    RowSpacing="3"
+                                                    Padding="0,4">
+
+                                                    <Label
+                                                        Text="{Binding DiaSemana}"
+                                                        FontSize="14"
+                                                        FontAttributes="Bold"
+                                                        TextColor="#1B475D" />
+
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Grid.Row="0"
+                                                        Text="{Binding HoraInicio, StringFormat='{}{0:hh\\:mm}'}"
+                                                        FontSize="13"
+                                                        TextColor="#000000"
+                                                        HorizontalTextAlignment="End" />
+
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Text="Horario"
+                                                        FontSize="11"
+                                                        TextColor="#777777" />
+
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        Text="{Binding HoraFin, StringFormat='{}{0:hh\\:mm}'}"
+                                                        FontSize="13"
+                                                        TextColor="#000000"
+                                                        HorizontalTextAlignment="End" />
+
+                                                </Grid>
+
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+
+                                    </CollectionView>
+
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

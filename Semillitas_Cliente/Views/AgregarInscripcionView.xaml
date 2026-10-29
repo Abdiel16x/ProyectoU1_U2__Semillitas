@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.AgregarInscripcionView"
+    Title="Agregar inscripción"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Nueva inscripción"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Label
+                    Text="Registra a un alumno en uno de los talleres disponibles."
+                    FontSize="14"
+                    TextColor="#1B475D" />
+            </VerticalStackLayout>
+
+            <!-- Formulario -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeShape="RoundRectangle 12"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <!-- Alumno -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Alumno"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+
+                        <Picker
+                            Title="Seleccionar alumno"
+                            ItemsSource="{Binding Alumnos}"
+                            ItemDisplayBinding="{Binding Nombre}"
+                            SelectedItem="{Binding AlumnoSeleccionado}"
+                            TextColor="Black"
+                            TitleColor="#777777" />
+                    </VerticalStackLayout>
+
+                    <!-- Taller -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Taller"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+
+                        <Picker
+                            Title="Seleccionar taller"
+                            ItemsSource="{Binding Talleres}"
+                            ItemDisplayBinding="{Binding Nombre}"
+                            SelectedItem="{Binding TallerSeleccionado}"
+                            TextColor="Black"
+                            TitleColor="#777777" />
+                    </VerticalStackLayout>
+
+                    <!-- Período -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Período"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+
+                        <Picker
+                            Title="Seleccionar período"
+                            ItemsSource="{Binding Periodos}"
+                            ItemDisplayBinding="{Binding Nombre}"
+                            SelectedItem="{Binding PeriodoSeleccionado}"
+                            TextColor="Black"
+                            TitleColor="#777777" />
+                    </VerticalStackLayout>
+
+                    <!-- Mensaje -->
+                    <Label
+                        Text="{Binding Mensaje}"
+                        FontSize="13"
+                        TextColor="#1B475D" />
+
+                    <!-- Acciones -->
+                    <Button
+                        Text="Guardar inscripción"
+                        Command="{Binding GuardarCommand}"
+                        BackgroundColor="#1B475D"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="15,12" />
+
+                    <Button
+                        Text="Cancelar"
+                        Command="{Binding CancelarCommand}"
+                        BackgroundColor="#FAD564"
+                        TextColor="#1B475D"
+                        CornerRadius="10"
+                        Padding="15,12" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

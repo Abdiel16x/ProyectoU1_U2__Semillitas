@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.InscripcionesView"
+    Title="Inscripciones"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Inscripciones"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Label
+                    Text="Administra las inscripciones a los talleres."
+                    FontSize="14"
+                    TextColor="#1B475D" />
+            </VerticalStackLayout>
+
+            <!-- Nueva inscripción -->
+            <Button
+                Text="+ Nueva inscripción"
+                Command="{Binding AgregarInscripcionCommand}"
+                BackgroundColor="#1B475D"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="15,12"
+                HorizontalOptions="Fill" />
+
+            <!-- Búsqueda y filtro de taller -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeShape="RoundRectangle 12"
+                Padding="15">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Entry
+                        Placeholder="Buscar por nombre del alumno..."
+                        Text="{Binding Busqueda}"
+                        ClearButtonVisibility="WhileEditing"
+                        TextColor="Black"
+                        PlaceholderColor="#777777" />
+
+                    <Picker
+                        Title="Seleccionar taller"
+                        ItemsSource="{Binding Talleres}"
+                        ItemDisplayBinding="{Binding Nombre}"
+                        SelectedItem="{Binding TallerSeleccionado}"
+                        TextColor="Black"
+                        TitleColor="#777777" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Resumen -->
+            <Label
+                Text="Resumen"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#1B475D" />
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeShape="RoundRectangle 12"
+                Padding="15">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="Total de inscripciones"
+                        FontSize="13"
+                        TextColor="#1B475D" />
+
+                    <Label
+                        Text="{Binding TotalInscripciones}"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        TextColor="#1B475D" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Lista de inscripciones -->
+            <Label
+                Text="Lista de inscripciones"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#1B475D" />
+
+            <CollectionView
+                ItemsSource="{Binding Inscripciones}"
+                SelectionMode="None">
+
+                <CollectionView.EmptyView>
+                    <Border
+                        BackgroundColor="White"
+                        Stroke="#8EBD9D"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="25">
+
+                        <VerticalStackLayout
+                            Spacing="8"
+                            HorizontalOptions="Center">
+
+                            <Label
+                                Text="No hay inscripciones registradas"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Text="Cuando existan registros, aparecerán aquí."
+                                FontSize="13"
+                                TextColor="#1B475D"
+                                HorizontalTextAlignment="Center" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border
+                            BackgroundColor="White"
+                            Stroke="#8EBD9D"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="16">
+
+                            <VerticalStackLayout Spacing="12">
+
+                                <!-- Alumno -->
+                                <Label
+                                    Text="{Binding Alumno}"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="#1B475D"
+                                    LineBreakMode="WordWrap" />
+
+                                <BoxView
+                                    HeightRequest="1"
+                                    Color="#8EBD9D" />
+
+                                <!-- Taller -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        Text="Taller"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding Taller}"
+                                        FontSize="14"
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+
+                                <!-- Periodo -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        Text="Periodo"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding Periodo}"
+                                        FontSize="14"
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

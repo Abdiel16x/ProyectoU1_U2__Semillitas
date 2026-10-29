@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.InicioView"
+    BackgroundColor="#EEE5C2"
+    Title="Inicio">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="24">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="¡Bienvenido a Semillitas!"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D"
+                    LineBreakMode="WordWrap" />
+
+                <Label
+                    Text="Resumen general de tu escuela."
+                    FontSize="15"
+                    TextColor="#000000" />
+            </VerticalStackLayout>
+
+            <!-- Indicadores -->
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="12"
+                RowSpacing="12">
+
+                <!-- Talleres activos -->
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="14">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Talleres activos"
+                            FontSize="14"
+                            TextColor="#1B475D"
+                            LineBreakMode="WordWrap" />
+
+                        <Label
+                            Text="{Binding TalleresActivos}"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Alumnos inscritos -->
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="14">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Alumnos inscritos"
+                            FontSize="14"
+                            TextColor="#1B475D"
+                            LineBreakMode="WordWrap" />
+
+                        <Label
+                            Text="{Binding AlumnosInscritos}"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Pagos pendientes -->
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Stroke="#FAD564"
+                    StrokeThickness="1"
+                    Padding="14">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Pagos pendientes"
+                            FontSize="14"
+                            TextColor="#1B475D"
+                            LineBreakMode="WordWrap" />
+
+                        <Label
+                            Text="{Binding PagosPendientes}"
+                            FontSize="30"
+                            FontAttributes="Bold"
+                            TextColor="#1B475D" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <!-- Próximos talleres -->
+            <VerticalStackLayout Spacing="14">
+                <Label
+                    Text="Próximos talleres"
+                    FontSize="21"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="12">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <CollectionView
+                        ItemsSource="{Binding ProximosTalleres}"
+                        SelectionMode="None"
+                        EmptyView="No hay próximos talleres para mostrar.">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout
+                                    Spacing="5"
+                                    Padding="4,12">
+
+                                    <Label
+                                        Text="{Binding Nombre}"
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        TextColor="#1B475D"
+                                        LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </Border>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

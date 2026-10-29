@@ -1,0 +1,172 @@
+xml<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.TutoresView"
+    Title="Tutores"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Tutores"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Label
+                    Text="Administra la información de los tutores de Semillitas."
+                    FontSize="14"
+                    TextColor="#1B475D" />
+            </VerticalStackLayout>
+
+            <!-- Nuevo tutor -->
+            <Button
+                Text="+ Nuevo tutor"
+                Command="{Binding AgregarTutorCommand}"
+                BackgroundColor="#1B475D"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="15,12"
+                HorizontalOptions="Fill" />
+
+            <!-- Búsqueda -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeShape="RoundRectangle 12"
+                Padding="15">
+
+                <Entry
+                    Placeholder="Buscar tutor por nombre..."
+                    Text="{Binding Busqueda}"
+                    ClearButtonVisibility="WhileEditing"
+                    TextColor="Black"
+                    PlaceholderColor="#777777" />
+
+            </Border>
+
+            <!-- Resumen -->
+            <Label
+                Text="Resumen"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#1B475D" />
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeShape="RoundRectangle 12"
+                Padding="15">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="Total de tutores"
+                        FontSize="13"
+                        TextColor="#1B475D" />
+
+                    <Label
+                        Text="{Binding TotalTutores}"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        TextColor="#1B475D" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Lista de tutores -->
+            <Label
+                Text="Lista de tutores"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#1B475D" />
+
+            <CollectionView
+                ItemsSource="{Binding Tutores}"
+                SelectionMode="None">
+
+                <CollectionView.EmptyView>
+                    <Border
+                        BackgroundColor="White"
+                        Stroke="#8EBD9D"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="25">
+
+                        <VerticalStackLayout
+                            Spacing="8"
+                            HorizontalOptions="Center">
+
+                            <Label
+                                Text="No hay tutores registrados"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Text="Cuando existan registros, aparecerán aquí."
+                                FontSize="13"
+                                TextColor="#1B475D"
+                                HorizontalTextAlignment="Center" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border
+                            BackgroundColor="White"
+                            Stroke="#8EBD9D"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="16"
+                            Margin="0,0,0,2">
+
+                            <VerticalStackLayout Spacing="12">
+
+                                <!-- Nombre -->
+                                <Label
+                                    Text="{Binding Nombre}"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="#1B475D" />
+
+                                <BoxView
+                                    HeightRequest="1"
+                                    Color="#8EBD9D" />
+
+                                <!-- Teléfono -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        Text="Teléfono"
+                                        FontSize="12"
+                                        TextColor="#1B475D" />
+
+                                    <Label
+                                        Text="{Binding Telefono}"
+                                        FontSize="14"
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

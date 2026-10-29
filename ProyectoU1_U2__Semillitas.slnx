@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Semillitas_Api/Semillitas_Api.csproj" />
+  <Project Path="Semillitas_Cliente/Semillitas_Cliente.csproj" Id="0a795e9f-4a61-4a70-b166-194ff3f15f4e">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="Semillitas_Core/Semillitas_Core.csproj" />
+</Solution>

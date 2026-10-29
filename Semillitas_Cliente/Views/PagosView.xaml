@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.PagosView"
+    Title="Pagos"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="22">
+
+            <!-- Encabezado -->
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="Pagos"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Label
+                    Text="Consulta y gestiona los pagos de las mensualidades."
+                    FontSize="14"
+                    TextColor="#000000" />
+            </VerticalStackLayout>
+
+            <!-- Registrar pago -->
+            <Button
+                Text="+ Registrar pago"
+                BackgroundColor="#1B475D"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="48"
+                HorizontalOptions="Fill" />
+
+            <!-- Búsqueda y filtro de período -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#8EBD9D"
+                StrokeThickness="1"
+                Padding="14">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Entry
+                        Placeholder="Buscar por nombre de alumno..."
+                        Text="{Binding Busqueda}"
+                        ClearButtonVisibility="WhileEditing"
+                        BackgroundColor="White"
+                        TextColor="#1B475D"
+                        PlaceholderColor="#777777"
+                        HeightRequest="48" />
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Periodo"
+                            FontSize="13"
+                            TextColor="#1B475D" />
+
+                        <Picker
+                            Title="Selecciona un periodo"
+                            BackgroundColor="White"
+                            TextColor="#1B475D"
+                            HeightRequest="48"
+                            ItemsSource="{Binding Periodos}"
+                            ItemDisplayBinding="{Binding Nombre}"
+                            SelectedItem="{Binding PeriodoSeleccionado}" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Resumen -->
+            <VerticalStackLayout Spacing="12">
+                <Label
+                    Text="Resumen de pagos"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="Auto,Auto"
+                    ColumnSpacing="12"
+                    RowSpacing="12">
+
+                    <!-- Pagos realizados -->
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="White"
+                        Stroke="#8EBD9D"
+                        StrokeThickness="1"
+                        Padding="14">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label
+                                Text="Pagos realizados"
+                                FontSize="13"
+                                TextColor="#1B475D" />
+
+                            <Label
+                                Text="{Binding PagosRealizados}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Pagos pendientes -->
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BackgroundColor="White"
+                        Stroke="#FAD564"
+                        StrokeThickness="1"
+                        Padding="14">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label
+                                Text="Pagos pendientes"
+                                FontSize="13"
+                                TextColor="#1B475D" />
+
+                            <Label
+                                Text="{Binding PagosPendientes}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Total de pagos -->
+                    <Border
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="White"
+                        Stroke="#8EBD9D"
+                        StrokeThickness="1"
+                        Padding="14">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label
+                                Text="Total de pagos"
+                                FontSize="13"
+                                TextColor="#1B475D" />
+
+                            <Label
+                                Text="{Binding TotalPagos, StringFormat='{0:C}'}"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="#1B475D" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Listado de pagos -->
+            <VerticalStackLayout Spacing="12">
+                <Label
+                    Text="Listado de pagos"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="#1B475D" />
+
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="12">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <CollectionView
+                        ItemsSource="{Binding Pagos}"
+                        SelectionMode="None">
+
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout
+                                Padding="20"
+                                Spacing="8"
+                                HorizontalOptions="Center">
+
+                                <Label
+                                    Text="No hay pagos registrados"
+                                    FontSize="17"
+                                    FontAttributes="Bold"
+                                    TextColor="#1B475D"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    Text="Cuando existan registros, aparecerán aquí."
+                                    FontSize="14"
+                                    TextColor="#000000"
+                                    HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                                <Border
+                                    BackgroundColor="White"
+                                    Stroke="#D3DC7C"
+                                    StrokeThickness="1"
+                                    Padding="12"
+                                    Margin="0,0,0,12">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10" />
+                                    </Border.StrokeShape>
+
+                                    <VerticalStackLayout Spacing="10">
+
+                                        <!-- Alumno -->
+                                        <Label
+                                            Text="{Binding Alumno}"
+                                            FontSize="17"
+                                            FontAttributes="Bold"
+                                            TextColor="#1B475D"
+                                            LineBreakMode="WordWrap" />
+
+                                        <BoxView
+                                            HeightRequest="1"
+                                            Color="#D3DC7C" />
+
+                                        <!-- Información del pago -->
+                                        <Grid
+                                            ColumnDefinitions="*,*"
+                                            RowDefinitions="Auto,Auto"
+                                            ColumnSpacing="12"
+                                            RowSpacing="10">
+
+                                            <!-- Periodo -->
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    Text="Periodo"
+                                                    FontSize="12"
+                                                    TextColor="#1B475D" />
+
+                                                <Label
+                                                    Text="{Binding Periodo}"
+                                                    FontSize="14"
+                                                    TextColor="#000000"
+                                                    LineBreakMode="WordWrap" />
+                                            </VerticalStackLayout>
+
+                                            <!-- Total calculado -->
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="4">
+
+                                                <Label
+                                                    Text="Monto"
+                                                    FontSize="12"
+                                                    TextColor="#1B475D" />
+
+                                                <Label
+                                                    Text="{Binding TotalCalculado, StringFormat='{0:C}'}"
+                                                    FontSize="16"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#1B475D" />
+                                            </VerticalStackLayout>
+
+                                            <!-- Estado pagado -->
+                                            <VerticalStackLayout
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Spacing="4">
+
+                                                <Label
+                                                    Text="Pagado"
+                                                    FontSize="12"
+                                                    TextColor="#1B475D" />
+
+                                                <Label
+                                                    Text="{Binding Pagado}"
+                                                    FontSize="14"
+                                                    TextColor="#1B475D" />
+                                            </VerticalStackLayout>
+
+                                        </Grid>
+
+                                        <Button
+                                            Text="Ver pago"
+                                            BackgroundColor="#1B475D"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            HeightRequest="44"
+                                            HorizontalOptions="Fill" />
+
+                                    </VerticalStackLayout>
+                                </Border>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </Border>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

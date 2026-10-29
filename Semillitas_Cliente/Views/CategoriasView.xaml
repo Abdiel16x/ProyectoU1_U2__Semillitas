@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Semillitas_Cliente.Views.CategoriasView"
+    Title="Categorías"
+    BackgroundColor="#EEE5C2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Categorías"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#1B475D" />
+
+                <Label Text="Consulta y administra las categorías de los talleres."
+                       FontSize="14"
+                       TextColor="Black" />
+            </VerticalStackLayout>
+
+            <Button Text="+ Nueva categoría"
+                    Command="{Binding MostrarFormularioCommand}"
+                    BackgroundColor="#1B475D"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="48" />
+
+            <Border IsVisible="{Binding FormularioVisible}"
+                    BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="16">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Registrar categoría"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1B475D" />
+
+                    <Entry Placeholder="Nombre de la categoría"
+                           Text="{Binding Nombre}"
+                           BackgroundColor="#EEE5C2"
+                           TextColor="#1B475D"
+                           PlaceholderColor="#777777" />
+
+                    <Label Text="{Binding Mensaje}"
+                           TextColor="#1B475D"
+                           LineBreakMode="WordWrap" />
+
+                    <Button Text="Guardar"
+                            Command="{Binding GuardarCommand}"
+                            BackgroundColor="#1B475D"
+                            TextColor="White"
+                            CornerRadius="10" />
+
+                    <Button Text="Cancelar"
+                            Command="{Binding CancelarCommand}"
+                            BackgroundColor="#FAD564"
+                            TextColor="#1B475D"
+                            CornerRadius="10" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Entry Placeholder="Buscar categoría..."
+                   Text="{Binding Busqueda}"
+                   BackgroundColor="White"
+                   TextColor="#1B475D"
+                   PlaceholderColor="#777777"
+                   HeightRequest="48" />
+
+            <Border BackgroundColor="White"
+                    Stroke="#8EBD9D"
+                    StrokeThickness="1"
+                    Padding="15">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Categorías registradas"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1B475D" />
+
+                    <CollectionView ItemsSource="{Binding Categorias}"
+                                    SelectionMode="None"
+                                    EmptyView="No hay categorías registradas.">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#EEE5C2"
+                                        Stroke="#D3DC7C"
+                                        StrokeThickness="1"
+                                        Padding="12"
+                                        Margin="0,0,0,10">
+
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10" />
+                                    </Border.StrokeShape>
+
+                                    <Label Text="{Binding Nombre}"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           TextColor="#1B475D"
+                                           VerticalOptions="Center" />
+
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
