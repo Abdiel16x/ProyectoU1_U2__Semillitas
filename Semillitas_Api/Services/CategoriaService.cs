@@ -47,10 +47,10 @@ namespace Semillitas_Api.Services
 
         public bool Delete(int id)
         {
-            var entidad = repository.GetById(id);
-            if (entidad == null) return false;
+            var entity = repository.GetById(id);
+            if (entity == null) return false;
 
-            repository.Delete(entidad);
+            repository.Delete(entity);
             return true;
         }
     }
