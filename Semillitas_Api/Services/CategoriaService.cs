@@ -34,5 +34,24 @@ namespace Semillitas_Api.Services
             var data = repository.Add(dto.ToEntity());
             return data.ToDTO();
         }
+
+        public CategoriaDTO? Update(int id, CategoriaDTO dto)
+        {
+            var entity = repository.GetById(id);
+            if (entity == null) return null;
+
+            entity.Nombre = dto.Nombre;
+            repository.Update(entity);
+            return entity.ToDTO();
+        }
+
+        public bool Delete(int id)
+        {
+            var entidad = repository.GetById(id);
+            if (entidad == null) return false;
+
+            repository.Delete(entidad);
+            return true;
+        }
     }
 }

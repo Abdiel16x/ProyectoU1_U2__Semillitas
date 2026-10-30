@@ -34,5 +34,26 @@ namespace Semillitas_Api.Controllers
 
             return Ok(service.Create(dto));
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, TutorDTO dto)
+        {
+            var validation = validator.IsValid(dto);
+            if (!validation.IsValid) return BadRequest(validation.Errors);
+
+            var actualizado = service.Update(id, dto);
+            if (actualizado == null) return NotFound("Tutor no encontrado");
+
+            return Ok(actualizado);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var eliminado = service.Delete(id);
+            if (!eliminado) return NotFound("Tutor no encontrado");
+
+            return NoContent();
+        }
     }
 }

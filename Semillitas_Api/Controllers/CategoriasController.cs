@@ -37,5 +37,26 @@ namespace Semillitas_Api.Controllers
             var creada = service.Create(dto);
             return Ok(creada);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, CategoriaDTO dto)
+        {
+            var validation = validator.IsValid(dto);
+            if (!validation.IsValid) return BadRequest(validation.Errors);
+
+            var actualizada = service.Update(id, dto);
+            if (actualizada == null) return NotFound("Categoría no encontrada");
+
+            return Ok(actualizada);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var eliminado = service.Delete(id);
+            if (!eliminado) return NotFound("Categoría no encontrada");
+
+            return NoContent();
+        }
     }
 }

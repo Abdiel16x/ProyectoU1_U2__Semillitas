@@ -58,6 +58,32 @@ namespace Semillitas_Api.Services
 
             return GetById(data.Id);
         }
+
+        public TallerDTO? Update(int id, CreateTallerDTO dto)
+        {
+            var taller = repository.Query().Include(t => t.HorariosTaller).FirstOrDefault(t => t.Id == id);
+            if (taller == null) return null;
+
+            taller.Nombre = dto.Nombre;
+            taller.IdInstructor = dto.IdInstructor;
+            taller.IdCategoria = dto.IdCategoria;
+            taller.CupoMaximo = dto.CupoMaximo;
+            taller.CostoMensual = dto.CostoMensual;
+
+            taller.HorariosTaller.Clear();
+            foreach (var horario in dto.Horarios)
+            {
+                taller.HorariosTaller.Add(new HorariosTaller
+                {
+                    DiaSemana = horario.DiaSemana,
+                    HoraInicio = horario.HoraInicio,
+                    HoraFin = horario.HoraFin
+                });
+            }
+
+            repository.Update(taller);
+            return GetById(taller.Id);
+        }
     }
 
 }

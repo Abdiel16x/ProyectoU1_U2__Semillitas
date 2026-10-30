@@ -46,5 +46,17 @@ namespace Semillitas_Api.Controllers
 
             return Ok(service.Create(dto));
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, CreateTallerDTO dto)
+        {
+            var validation = validator.IsValid(dto);
+            if (!validation.IsValid) return BadRequest(validation.Errors);
+
+            var actualizado = service.Update(id, dto);
+            if (actualizado == null) return NotFound("Taller no encontrado");
+
+            return Ok(actualizado);
+        }
     }
 }
